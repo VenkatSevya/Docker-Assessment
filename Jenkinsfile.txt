@@ -45,16 +45,16 @@ pipeline {
 	dontWaitForConcurrentBuildCompletion: false,
 	entries: [
 				[
-					bucket: 'myartifactorybuket', 
+					bucket: 's3-artifact-test', 
 					excludedFile: '/webapp/target',
 					flatten: false,
 					gzipFiles: false,
 					keepForever: false,
 					managedArtifacts: false,
 					noUploadOnFailure: false,
-					selectedRegion: 'ap-southeast-1',
+					selectedRegion: 'us-east-1',
 					showDirectlyInBrowser: false,
-					sourceFile: '**/webapp/target/*.war',
+					sourceFile: '**/target/*.war',
 					storageClass: 'STANDARD',
 					uploadFromSlave: false,
 					useServerSideEncryption: false
