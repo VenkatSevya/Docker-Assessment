@@ -13,7 +13,7 @@ pipeline {
 	stage('Clone') {
       steps {
         // Get some code from a GitHub repository
-         git branch: "main", url: "https://github.com/PavanDeepakPagadala/PavanDevOpsProject.git"
+         git branch: "main", url: https://github.com/VenkatSevya/DevOps-with-S3-bucket.git
 		
 }
 }
@@ -31,7 +31,7 @@ pipeline {
 	stage('SonarQube analysis') {
 //    def scannerHome = tool 'SonarScanner 4.0';
         steps{
-        withSonarQubeEnv('sonarqube-8.9.9') { 
+        withSonarQubeEnv('sonarqube-7.7.0') { 
         // If you have configured more than one global server connection, you can specify its name
 //      sh "${scannerHome}/bin/sonar-scanner"
         sh "mvn sonar:sonar"
