@@ -13,7 +13,7 @@ pipeline {
 	stage('Clone') {
       steps {
         // Get some code from a GitHub repository
-         git branch: "main", url: https://github.com/VenkatSevya/DevOps-with-S3-bucket.git
+         git branch: "main", url: "https://github.com/VenkatSevya/DevOps-with-S3-bucket.git"
 		
 }
 }
