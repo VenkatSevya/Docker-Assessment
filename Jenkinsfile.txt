@@ -45,14 +45,14 @@ pipeline {
 	dontWaitForConcurrentBuildCompletion: false,
 	entries: [
 				[
-					bucket: 's3-artifact-test', 
+					bucket: 's3.new', 
 					excludedFile: '/webapp/target',
 					flatten: false,
 					gzipFiles: false,
 					keepForever: false,
 					managedArtifacts: false,
 					noUploadOnFailure: false,
-					selectedRegion: 'us-east-1',
+					selectedRegion: 'ap-south-1',
 					showDirectlyInBrowser: false,
 					sourceFile: '**/webapp/target/*.war',
 					storageClass: 'STANDARD',
