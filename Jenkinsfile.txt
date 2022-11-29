@@ -3,7 +3,7 @@ pipeline {
 
   tools {
     // Install the Maven version configured as "M2_HOME" and add it to the path.
-    maven "/usr/share/maven"
+    maven "mavenp"
   }
 
   stages {
