@@ -46,7 +46,7 @@ pipeline {
 	entries: [
 				[
 					bucket: 's3-artifact-test', 
-					excludedFile: '/webapp/target',
+					excludedFile: '/target',
 					flatten: false,
 					gzipFiles: false,
 					keepForever: false,
