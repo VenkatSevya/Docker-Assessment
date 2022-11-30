@@ -12,6 +12,7 @@ pipeline {
       steps {
         // Get some code from a GitHub repository
          git branch: "main", url: "https://github.com/VenkatSevya/DevOps-with-S3-bucket.git"
+	 sh "git config --global --unset credential.helper"
 		
 }
 }
