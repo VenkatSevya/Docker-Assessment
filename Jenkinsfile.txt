@@ -12,7 +12,7 @@ pipeline {
       steps {
         // Get some code from a GitHub repository
          git branch: "main", url: "https://github.com/VenkatSevya/DevOps.git"
-	 sh "git config --global --unset credential.helper"
+	 sh "git credentialsId: '43a4c7a9-79db-4f3f-94a5-a081ea2e5652', url: 'https://github.com/VenkatSevya/DevOps.git'"
 		
 }
 }
