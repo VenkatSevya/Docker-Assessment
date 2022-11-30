@@ -1,7 +1,8 @@
 # Pull base image 
-From tomcat:8-jre8 
+from ubuntu:latest
 
 # Maintainer 
-MAINTAINER "sai4cs@gmail.com" 
-COPY ./webapp.war /usr/local/tomcat/webapps
-RUN cp -R /usr/local/tomcat/webapps.dist/* /usr/local/tomcat/webapps
+MAINTAINER "gopiperumalla14@gmail.com" 
+#COPY ./webapp.war /usr/local/tomcat/webapps
+#RUN cp -R /usr/local/tomcat/webapps.dist/* /usr/local/tomcat/webapps
+RUN aws s3 cp s3://s3.new/webapp/target/webapp.war /home/ubuntu/webapp.war --recursive
