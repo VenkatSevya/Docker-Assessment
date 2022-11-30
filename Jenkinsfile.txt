@@ -75,7 +75,7 @@ pipeline {
           sh 'docker tag webapp:latest public.ecr.aws/l0i0m3x2/docker_repo:latest'
           sh 'docker push public.ecr.aws/l0i0m3x2/docker_repo:latest' 
 	}
-     }
+      }
   }
 //	stage('Copy to Ansible'){
  //  steps {
