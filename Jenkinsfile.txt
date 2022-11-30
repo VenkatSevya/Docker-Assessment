@@ -68,10 +68,10 @@ pipeline {
     stage('Publish ECR') {
       steps {
 	withEnv(["AWS_ACCESS_KEY_ID=${env.AWS_ACCESS_KEY_ID}", "AWS_SECRET_ACCESS_KEY=${env.AWS_SECRET_ACCESS_KEY}", "AWS_DEFAULT_REGION=${env.AWS_DEFAULT_REGION}"]) {
-          sh 'docker login -u AWS -p $(aws ecr-public get-login-password --region us-east-1) public.ecr.aws/l0i0m3x2'
-          sh 'docker build -t webapp .'
-          sh 'docker tag webapp:latest public.ecr.aws/l0i0m3x2/docker_repo:latest'
-          sh 'docker push public.ecr.aws/l0i0m3x2/docker_repo:latest' 
+          sh 'aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 216303287732.dkr.ecr.ap-south-1.amazonaws.com'
+          sh 'docker build -t myrepo .'
+          sh 'docker tag myrepo:latest 216303287732.dkr.ecr.ap-south-1.amazonaws.com/myrepo:latest'
+          sh 'docker push 216303287732.dkr.ecr.ap-south-1.amazonaws.com/myrepo:latest' 
 	}
       } 
     }
