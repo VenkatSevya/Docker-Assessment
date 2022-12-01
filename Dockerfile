@@ -2,4 +2,4 @@
 from ubuntu:latest
 # Maintainer 
 MAINTAINER "gopiperumalla14@gmail.com" 
-RUN s3 cp s3://s3.new/webapp/target/webapp.war /home/ubuntu/webapp.war
+RUN cp -R /home/ubuntu/webapp.war /home/ubuntu/Ansible
