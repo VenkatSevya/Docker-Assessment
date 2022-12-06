@@ -11,7 +11,7 @@ pipeline {
 	stage('Clone') {
       steps {
         // Get some code from a GitHub repository
-	 git branch: "main", url: "https://github.com/VenkatSevya/DevOps.git"
+	 git branch: "main", url: "https://github.com/VenkatSevya/Docker-Assessment.git"
 		
 }
 }
@@ -43,7 +43,7 @@ pipeline {
 	dontWaitForConcurrentBuildCompletion: false,
 	entries: [
 				[
-					bucket: 's3.new', 
+					bucket: 'new.s3bucket', 
 					excludedFile: '/webapp/target',
 					flatten: false,
 					gzipFiles: false,
@@ -59,7 +59,7 @@ pipeline {
 				]
 			], 
 	pluginFailureResultConstraint: 'FAILURE', 
-	profileName: 's3.new',
+	profileName: 'new.s3bucket',
 	userMetadata: []
 
       }
@@ -69,10 +69,10 @@ pipeline {
       steps {
         //withEnv(["AWS_ACCESS_KEY_ID=${env.AWS_ACCESS_KEY_ID}", "AWS_SECRET_ACCESS_KEY=${env.AWS_SECRET_ACCESS_KEY}", "AWS_DEFAULT_REGION=${env.AWS_DEFAULT_REGION}"]) 
 	script {
-          sh 'aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 216303287732.dkr.ecr.ap-south-1.amazonaws.com'
-          sh 'docker build -t newrepo .'
-          sh 'docker tag newrepo:latest 216303287732.dkr.ecr.ap-south-1.amazonaws.com/newrepo:latest'
-          sh 'docker push 216303287732.dkr.ecr.ap-south-1.amazonaws.com/newrepo:latest' 
+          sh 'aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 586583118654.dkr.ecr.ap-south-1.amazonaws.com'
+          sh 'docker build -t docker.repo .'
+          sh 'docker tag docker.repo:latest 586583118654.dkr.ecr.ap-south-1.amazonaws.com/docker.repo:latest'
+          sh 'docker push 586583118654.dkr.ecr.ap-south-1.amazonaws.com/docker.repo:latest' 
 	}
       } 
     }
