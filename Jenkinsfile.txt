@@ -73,8 +73,8 @@ pipeline {
           //sh 'docker build -t docker.repo .'
           //sh 'docker tag docker.repo:latest 586583118654.dkr.ecr.ap-south-1.amazonaws.com/docker.repo:latest'
           //sh 'docker push 586583118654.dkr.ecr.ap-south-1.amazonaws.com/docker.repo:latest' 
-	}
-      } 
-    }
+	//}
+      //} 
+    //}
    } 
 }
