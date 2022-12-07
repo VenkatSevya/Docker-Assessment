@@ -43,7 +43,7 @@ pipeline {
 	dontWaitForConcurrentBuildCompletion: false,
 	entries: [
 				[
-					bucket: 'new.s3bucket', 
+					bucket: 'new.bucket1', 
 					excludedFile: '/webapp/target',
 					flatten: false,
 					gzipFiles: false,
@@ -59,7 +59,7 @@ pipeline {
 				]
 			], 
 	pluginFailureResultConstraint: 'FAILURE', 
-	profileName: 'new.s3bucket',
+	profileName: 'new.bucket1',
 	userMetadata: []
 
       }
