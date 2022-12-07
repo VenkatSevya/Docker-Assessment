@@ -1,5 +1,5 @@
 # Pull base image 
-from ubuntu:latest
+from ubuntu:22.04
 # Maintainer 
 LABEL MAINTAINER "narayana.vr6@gmail.com"
 RUN apt-get update
