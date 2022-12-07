@@ -11,8 +11,7 @@ pipeline {
 	stage('Clone') {
       steps {
         // Get some code from a GitHub repository
-         git branch: "main", url: "https://github.com/VenkatSevya/DevOps-with-S3-bucket.git"
-	 sh "git config --global --unset credential.helper"
+	 git branch: "main", url: "https://github.com/VenkatSevya/Docker-Assessment.git"
 		
 }
 }
@@ -30,7 +29,7 @@ pipeline {
 	stage('SonarQube analysis') {
     //def scannerHome = tool 'SonarScanner 4.7';
         steps{
-        withSonarQubeEnv('sonarqube') { 
+        withSonarQubeEnv('Sonarqube') { 
         // If you have configured more than one global server connection, you can specify its name
 //      sh "${scannerHome}/bin/sonar-scanner"
         sh "mvn sonar:sonar"
@@ -44,7 +43,7 @@ pipeline {
 	dontWaitForConcurrentBuildCompletion: false,
 	entries: [
 				[
-					bucket: 's3.new', 
+					bucket: 'new.bucket1', 
 					excludedFile: '/webapp/target',
 					flatten: false,
 					gzipFiles: false,
@@ -60,7 +59,7 @@ pipeline {
 				]
 			], 
 	pluginFailureResultConstraint: 'FAILURE', 
-	profileName: 's3.new',
+	profileName: 'new.bucket1',
 	userMetadata: []
 
       }
@@ -68,11 +67,12 @@ pipeline {
     
     stage('Publish ECR') {
       steps {
-	withEnv(["AWS_ACCESS_KEY_ID=${env.AWS_ACCESS_KEY_ID}", "AWS_SECRET_ACCESS_KEY=${env.AWS_SECRET_ACCESS_KEY}", "AWS_DEFAULT_REGION=${env.AWS_DEFAULT_REGION}"]) {
-          sh 'docker login -u AWS -p $(aws ecr-public get-login-password --region us-east-1) public.ecr.aws/l0i0m3x2'
-          sh 'docker build -t webapp .'
-          sh 'docker tag webapp:latest public.ecr.aws/l0i0m3x2/docker_repo:latest'
-          sh 'docker push public.ecr.aws/l0i0m3x2/docker_repo:latest' 
+        //withEnv(["AWS_ACCESS_KEY_ID=${env.AWS_ACCESS_KEY_ID}", "AWS_SECRET_ACCESS_KEY=${env.AWS_SECRET_ACCESS_KEY}", "AWS_DEFAULT_REGION=${env.AWS_DEFAULT_REGION}"]) 
+	script {
+          sh 'aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 586583118654.dkr.ecr.ap-south-1.amazonaws.com'
+          sh 'docker build -t docker.repo .'
+          sh 'docker tag docker.repo:latest 586583118654.dkr.ecr.ap-south-1.amazonaws.com/docker.repo:latest'
+          sh 'docker push 586583118654.dkr.ecr.ap-south-1.amazonaws.com/docker.repo:latest' 
 	}
       } 
     }
