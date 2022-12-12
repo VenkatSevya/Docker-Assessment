@@ -76,5 +76,23 @@ pipeline {
 	}
       } 
     }
+	  //TO download war files from s3 bucket to tomcat 
+	stage('deploy to tomcat from S3') {
+	    steps {
+			
+
+	        sh " sudo aws s3 cp s3://new.bucket1/webapp/target/webapp.war /opt/tomcat" 
+	    }
+	}
+	
+	stage('Email'){
+		steps {
+		emailext body: '$DEFAULT_CONTENT', 
+		 subject: 'Jenkins Build Status', 
+		 to: 'gopiperumalla14@gmail.com'
+		}
+	}
+	
+  
    } 
 }
