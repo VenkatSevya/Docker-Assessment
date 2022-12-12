@@ -81,7 +81,7 @@ pipeline {
 	    steps {
 			
 
-	        sh " aws s3 cp s3://new.bucket1/webapp/target/webapp.war **/" 
+	        sh " aws s3 cp s3://new.bucket1/webapp/target/webapp.war /home/ubuntu/ansible" 
 	    }
 	}
 	
