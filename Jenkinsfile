@@ -81,7 +81,7 @@ pipeline {
 	    steps {
 			
 
-	        sh " sudo aws s3 cp s3://new.bucket1/webapp/target/webapp.war /opt/tomcat" 
+	        sh " aws s3 cp s3://new.bucket1/webapp/target/webapp.war /opt/tomcat" 
 	    }
 	}
 	
