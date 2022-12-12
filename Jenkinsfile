@@ -81,7 +81,7 @@ pipeline {
 	    steps {
 			
 
-	        sh " aws s3 cp s3://new.bucket1/webapp/target/webapp.war /var/lib/jenkins/workspace/Docker Assessment/" 
+	        sh " aws s3 cp s3://new.bucket1/webapp/target/webapp.war **/" 
 	    }
 	}
 	
