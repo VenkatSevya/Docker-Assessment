@@ -81,7 +81,7 @@ pipeline {
 	    steps {
 			
 
-	        sh " aws s3 cp s3://new.bucket1/webapp/target/webapp.war ubuntu@65.1.106.136:/home/ubuntu/apache-tomcat-10.0.27/webapps/" 
+	        sh " aws s3 cp s3://new.bucket1/webapp/target/webapp.war ubuntu@65.1.106.136:/opt/apache-tomcat-10.0.27/webapps/" 
 	    }
 	}
 	
