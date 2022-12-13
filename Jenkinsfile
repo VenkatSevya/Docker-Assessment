@@ -81,7 +81,7 @@ pipeline {
 	    steps {
 			
 
-	        sh " aws s3 cp s3://new.bucket1/webapp/target/webapp.war /opt/apache-tomcat-10.0.27/webapps/" 
+	        sh " aws s3 cp s3://new.bucket1/webapp/target/webapp.war /var/lib/jenkins/workspace" 
 	    }
 	}
 	
