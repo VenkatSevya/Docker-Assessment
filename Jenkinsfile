@@ -11,8 +11,7 @@ pipeline {
 	stage('Clone') {
       steps {
         // Get some code from a GitHub repository
-	 git branch: "main", url: "https://github.com/VenkatSevya/Docker-Assessment.git"
-		
+	 git branch: "main", url: "https://github.com/VenkatSevya/Docker-Assessment.git"		
 	}
      }
 	stage('Compile') {
@@ -23,16 +22,16 @@ pipeline {
 	stage('Test') {
 	    steps {
 	        sh "mvn clean verify -DskipITs=true',junit '**/target/surefire-reports/TEST-*.xml'archive 'target/*.jar"
-
 	    }
 	}
 	stage('SonarQube analysis') {
         steps{
         withSonarQubeEnv('Sonarqube') { 
-        sh "mvn sonar:sonar"
+        	sh "mvn sonar:sonar"
+    		}
+      	   }
     	}
-      }
-    }
+	// To upload artifacts into S3 bucket
 	 stage('S3 Upload') {
       steps {
         s3Upload consoleLogLevel: 'INFO',
@@ -58,30 +57,28 @@ pipeline {
 	pluginFailureResultConstraint: 'FAILURE', 
 	profileName: 'new.bucket1',
 	userMetadata: []
-
       		}
-    	}
-	  
+    	}  
 	  //TO download war files from s3 bucket to tomcat 
 	stage('deploy to tomcat from S3') {
-	    steps {
-			
-
+	    steps {			
 	        sh " aws s3 cp s3://new.bucket1/webapp/target/webapp.war  /opt/apache-tomcat-10.0.27/webapps"
 	    }
 	}
-    
-    stage('Publish ECR') {
-      steps { 
-	script {
-          sh 'aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 586583118654.dkr.ecr.ap-south-1.amazonaws.com'
-          sh 'docker build -t docker.repo .'
-          sh 'docker tag docker.repo:latest 586583118654.dkr.ecr.ap-south-1.amazonaws.com/docker.repo:latest'
-          sh 'docker push 586583118654.dkr.ecr.ap-south-1.amazonaws.com/docker.repo:latest' 
-	}
-      } 
-    }
 	  
+    	// publish docker image into AWS ECR
+    	stage('Publish ECR') {
+      	steps { 
+		script {
+          	sh 'aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 586583118654.dkr.ecr.ap-south-1.amazonaws.com'
+          	sh 'docker build -t docker.repo .'
+          	sh 'docker tag docker.repo:latest 586583118654.dkr.ecr.ap-south-1.amazonaws.com/docker.repo:latest'
+          	sh 'docker push 586583118654.dkr.ecr.ap-south-1.amazonaws.com/docker.repo:latest' 
+		}
+      	    } 
+    	}
+	
+	// To send email notification for pipeline status
 	stage('Email'){
 		steps {
 		emailext body: '$DEFAULT_CONTENT', 
