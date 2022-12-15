@@ -76,11 +76,12 @@ pipeline {
 	  stage('Running Docker Container') {
 		  steps {
 			  script {
+				sh 'aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 586583118654.dkr.ecr.ap-south-1.amazonaws.com'
 				//sh "sudo docker rm -f webapp || true"   
-				sh "sudo docker pull 586583118654.dkr.ecr.ap-south-1.amazonaws.com/docker.repo:latest "
-				sh "sudo docker tag 586583118654.dkr.ecr.ap-south-1.amazonaws.com/docker.repo:latest webapp "
-				sh "sudo docker rmi 586583118654.dkr.ecr.ap-south-1.amazonaws.com/docker.repo:latest "
-				sh "sudo docker run --name webapp -itd -p 8000:8080 webapp"
+				sh "docker pull 586583118654.dkr.ecr.ap-south-1.amazonaws.com/docker.repo:latest "
+				sh "docker tag 586583118654.dkr.ecr.ap-south-1.amazonaws.com/docker.repo:latest webapp "
+				sh "docker rmi 586583118654.dkr.ecr.ap-south-1.amazonaws.com/docker.repo:latest "
+				sh "docker run --name webapp -itd -p 8000:8080 webapp"
 				  
 			  }
 		  }
