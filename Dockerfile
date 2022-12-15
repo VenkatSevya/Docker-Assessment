@@ -1,6 +1,7 @@
 # Pull base image 
-from ubuntu:22.04
+from tomcat : latest
 # Maintainer 
 LABEL MAINTAINER "gopiperumalla14@gmail.com"
-RUN apt-get update
-RUN cp -R /var/lib/jenkins/workspace/Docker Assessment/webapp/target/*.war /home/ubuntu/webapp.war
+COPY ./webapp/target/*.war /opt/apache-tomcat-10.0.27/webapps 
+EXPOSE 8080
+CMD ["/opt/apache-tomcat-10.0.27/bin/catalina.sh", "run"]
