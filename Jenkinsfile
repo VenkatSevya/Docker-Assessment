@@ -81,7 +81,7 @@ pipeline {
 				sh "docker pull 586583118654.dkr.ecr.ap-south-1.amazonaws.com/docker.repo:latest "
 				sh "docker tag 586583118654.dkr.ecr.ap-south-1.amazonaws.com/docker.repo:latest webapp "
 				sh "docker rmi 586583118654.dkr.ecr.ap-south-1.amazonaws.com/docker.repo:latest "
-				sh "sudo docker run --name webapp -itd -p 8002:8080 webapp"
+				sh "sudo docker run --name webapp -it -p 8002:8080 webapp"
 				  
 			  }
 		  }
