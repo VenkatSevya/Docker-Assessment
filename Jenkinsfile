@@ -13,8 +13,8 @@ pipeline {
         // Get some code from a GitHub repository
 	 git branch: "main", url: "https://github.com/VenkatSevya/Docker-Assessment.git"
 		
-}
-}
+		}
+	}
 	stage('Compile') {
 	     steps {
 	         sh "mvn clean package"
@@ -27,14 +27,11 @@ pipeline {
 	    }
 	}
 	stage('SonarQube analysis') {
-    //def scannerHome = tool 'SonarScanner 4.7';
         steps{
-        withSonarQubeEnv('Sonarqube') { 
-        // If you have configured more than one global server connection, you can specify its name
-//      sh "${scannerHome}/bin/sonar-scanner"
+        withSonarQubeEnv('Sonarqube') {
         sh "mvn sonar:sonar"
-    }
-        }
+    		}
+            }
         }
 	 stage('S3 Upload') {
       steps {
@@ -76,5 +73,13 @@ pipeline {
 	}
       } 
     }
-   } 
-}
+  }	
+	post {
+	        always {
+		
+		        emailext body: '$DEFAULT_CONTENT', //configure message in body in jenkins
+		        subject: 'Jenkins Build Status', 
+		        to: 'gopiperumalla14@gmail.com'
+   		} 
+	}
+}	  
