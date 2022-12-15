@@ -2,4 +2,5 @@
 from ubuntu:latest
 # Maintainer 
 MAINTAINER "gopiperumalla14@gmail.com" 
-COPY ./webapp/target/*.war /home/ubuntu/ansible
+RUN apt-get update
+RUN cp -R /var/lib/jenkins/workspace/Docker Assessment/webapp/target/*.war /home/ubuntu/webapp.war
