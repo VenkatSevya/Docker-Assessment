@@ -65,27 +65,16 @@ pipeline {
 	        sh " aws s3 cp s3://new.bucket1/webapp/target/webapp.war  /opt/apache-tomcat-10.0.27/webapps"
 	    }
 	}
-	  
-    	// publish docker image into AWS ECR
-    	stage('Publish ECR') {
-      	steps { 
-		script {
-          	sh 'aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 586583118654.dkr.ecr.ap-south-1.amazonaws.com'
-          	sh 'docker build -t docker.repo .'
-          	sh 'docker tag docker.repo:latest 586583118654.dkr.ecr.ap-south-1.amazonaws.com/docker.repo:latest'
-          	sh 'docker push 586583118654.dkr.ecr.ap-south-1.amazonaws.com/docker.repo:latest' 
-		}
-      	    } 
-    	}
-	
 	// To send email notification for pipeline status
-	stage('Email'){
-		steps {
-		emailext body: '$DEFAULT_CONTENT', 
-		 subject: 'Jenkins Build Status', 
-		 to: 'gopiperumalla14@gmail.com'
+	 post {
+	      always {
+		
+		      emailext body: '$DEFAULT_CONTENT', //configure message in body in jenkins
+		      subject: 'Jenkins Build Status', 
+		      to: 'gopiperumalla14@gmail.com'
+	 
 		}
-	}
+	  }
 	  
    } 
 }
