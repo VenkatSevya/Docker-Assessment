@@ -65,6 +65,7 @@ pipeline {
 	        sh " aws s3 cp s3://new.bucket1/webapp/target/webapp.war  /opt/apache-tomcat-10.0.27/webapps"
 	    }
 	}
+  }
 	// To send email notification for pipeline status
 	 post {
 	      always {
@@ -74,7 +75,5 @@ pipeline {
 		      to: 'gopiperumalla14@gmail.com'
 	 
 		}
-	  }
-	  
-   } 
+	  } 
 }
