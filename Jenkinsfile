@@ -11,7 +11,7 @@ pipeline {
 	stage('Clone') {
       steps {
         // Get some code from a GitHub repository
-	 git branch: "main", url: "https://github.com/VenkatSevya/Docker-Assessment.git"
+	 git branch: "master", url: "https://github.com/VenkatSevya/Docker-Assessment.git"
 		
 		}
 	}
